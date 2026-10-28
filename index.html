@@ -70,7 +70,7 @@
     .hero-badge-title { font-weight: 700; font-size: 14px; color: var(--navy); }
     .hero-badge-sub { font-size: 12px; color: var(--text-gray); }
 
-    /* 侧边悬浮栏（已支持完整点击跳转） */
+    /* 侧边悬浮栏 */
     .floating-sidebar {
       position: fixed; right: 0; top: 40%; transform: translateY(-50%); z-index: 999; display: flex; flex-direction: column; gap: 2px;
     }
@@ -100,7 +100,7 @@
     .product-icon { width: 40px; height: 40px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 15px; }
     .product-title { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
     .product-desc { font-size: 13px; color: var(--text-gray); margin-bottom: 20px; line-height: 1.5; }
-    .product-link { color: var(--blue); font-weight: 700; font-size: 18px; }
+    .product-link { color: var(--blue); font-weight: 700; font-size: 18px; display: inline-block; }
 
     /* OEM/ODM 服务区 */
     .oem-section {
@@ -183,7 +183,7 @@
     </div>
   </header>
 
-  <!-- 右侧悬浮按钮栏（已绑定可点击链接） -->
+  <!-- 右侧悬浮按钮栏 -->
   <div class="floating-sidebar">
     <a href="#contact" class="sidebar-item">
       <span>💬</span>
@@ -234,13 +234,15 @@
       <a href="#products" class="view-all">View All Products &rarr;</a>
     </div>
     <div class="product-grid">
+      <!-- 第一个产品：自动灌装机（已链接到 filling-machine.html） -->
       <div class="product-card">
-        <img src="<a href="filling-machine.html" class="product-link">&rarr;</a>" class="product-img" alt="Filling Machine">
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Filling Machine">
         <div class="product-icon">🧴</div>
         <h3 class="product-title">Automatic Filling Machine</h3>
         <p class="product-desc">Accurate filling, stable performance, suitable for various liquids and products.</p>
-        <a href="#contact" class="product-link">&rarr;</a>
+        <a href="filling-machine.html" class="product-link">&rarr;</a>
       </div>
+
       <div class="product-card">
         <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Capping Machine">
         <div class="product-icon">🧴</div>
@@ -248,6 +250,7 @@
         <p class="product-desc">High speed and precision capping for different cap types and bottles.</p>
         <a href="#contact" class="product-link">&rarr;</a>
       </div>
+
       <div class="product-card">
         <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Labeling Machine">
         <div class="product-icon">🏷️</div>
@@ -255,6 +258,7 @@
         <p class="product-desc">Accurate labeling, flexible application for round, square and special bottles.</p>
         <a href="#contact" class="product-link">&rarr;</a>
       </div>
+
       <div class="product-card">
         <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Production Line">
         <div class="product-icon">⚙️</div>
