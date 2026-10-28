@@ -6,7 +6,7 @@
   <title>TAVENROX - Packaging Machinery Manufacturer</title>
   <style>
     /* 基础重置与变量 */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
     :root {
       --navy: #0B2A4A;
       --blue: #0066FF;
@@ -29,18 +29,20 @@
     .brand-subtitle { font-size: 9px; font-weight: 700; color: var(--navy); letter-spacing: 2px; }
 
     nav { display: flex; gap: 30px; align-items: center; }
-    nav a { font-size: 14px; font-weight: 600; color: #475569; position: relative; padding: 5px 0; }
-    nav a.active { color: var(--blue); }
+    nav a { font-size: 14px; font-weight: 600; color: #475569; position: relative; padding: 5px 0; transition: 0.3s; }
+    nav a:hover, nav a.active { color: var(--blue); }
     nav a.active::after {
       content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--blue); border-radius: 2px;
     }
 
     .header-actions { display: flex; align-items: center; gap: 20px; }
-    .search-btn { background: none; border: none; cursor: pointer; color: #475569; }
+    .search-btn { background: none; border: none; cursor: pointer; color: #475569; font-size: 16px; }
     .quote-btn {
       background: var(--blue); color: #fff; border: none; padding: 10px 22px; border-radius: 25px;
       font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+      transition: 0.3s;
     }
+    .quote-btn:hover { background: #0052cc; }
 
     /* Hero 首屏区 */
     .hero {
@@ -52,8 +54,8 @@
     .hero-title span { color: var(--blue); }
     .hero-desc { font-size: 15px; color: var(--text-gray); max-width: 520px; margin-bottom: 30px; line-height: 1.6; }
     .hero-btns { display: flex; gap: 15px; margin-bottom: 40px; }
-    .btn-primary { background: var(--blue); color: #fff; padding: 14px 28px; border-radius: 6px; font-weight: 600; font-size: 15px; }
-    .btn-secondary { border: 1px solid var(--border-color); background: #fff; color: var(--navy); padding: 14px 28px; border-radius: 6px; font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+    .btn-primary { background: var(--blue); color: #fff; padding: 14px 28px; border-radius: 6px; font-weight: 600; font-size: 15px; transition: 0.3s; display: inline-block; }
+    .btn-primary:hover { background: #0052cc; }
 
     .hero-features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
     .feature-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--navy); }
@@ -68,13 +70,13 @@
     .hero-badge-title { font-weight: 700; font-size: 14px; color: var(--navy); }
     .hero-badge-sub { font-size: 12px; color: var(--text-gray); }
 
-    /* 侧边悬浮栏 */
+    /* 侧边悬浮栏（已支持完整点击跳转） */
     .floating-sidebar {
       position: fixed; right: 0; top: 40%; transform: translateY(-50%); z-index: 999; display: flex; flex-direction: column; gap: 2px;
     }
     .sidebar-item {
       background: var(--blue); color: #fff; padding: 12px 15px; display: flex; flex-direction: column; align-items: center;
-      font-size: 11px; font-weight: 600; gap: 4px; border-radius: 8px 0 0 8px; cursor: pointer; transition: 0.3s;
+      font-size: 11px; font-weight: 600; gap: 4px; border-radius: 8px 0 0 8px; cursor: pointer; transition: 0.3s; text-decoration: none;
     }
     .sidebar-item.whatsapp { background: #10B981; }
     .sidebar-item.email { background: var(--navy); }
@@ -85,7 +87,8 @@
     .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
     .section-tag { color: var(--blue); font-size: 13px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
     .section-title { font-size: 32px; font-weight: 800; color: var(--navy); }
-    .view-all { color: var(--blue); font-weight: 600; font-size: 14px; }
+    .view-all { color: var(--blue); font-weight: 600; font-size: 14px; transition: 0.3s; }
+    .view-all:hover { text-decoration: underline; }
 
     .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
     .product-card {
@@ -101,13 +104,14 @@
 
     /* OEM/ODM 服务区 */
     .oem-section {
-      background: var(--navy); color: #fff; display: grid; grid-template-columns: 1fr 1fr; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      background: var(--navy); color: #fff; display: grid; grid-template-columns: 1fr 1fr;
     }
     .oem-content { padding: 80px 8% 80px 10%; }
     .oem-tag { color: #38BDF8; font-size: 13px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
     .oem-title { font-size: 36px; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
     .oem-desc { font-size: 14px; color: #94A3B8; margin-bottom: 30px; line-height: 1.6; }
-    .oem-btn { display: inline-block; border: 1px solid #ffffff40; color: #fff; padding: 12px 28px; border-radius: 25px; font-weight: 600; margin-bottom: 40px; }
+    .oem-btn { display: inline-block; border: 1px solid #ffffff40; color: #fff; padding: 12px 28px; border-radius: 25px; font-weight: 600; margin-bottom: 40px; transition: 0.3s; }
+    .oem-btn:hover { background: rgba(255,255,255,0.1); }
     .oem-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .oem-feature-item { display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 600; }
     .oem-icon-box { width: 36px; height: 36px; background: #0066FF20; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--blue); }
@@ -130,14 +134,17 @@
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
     .form-group input, .form-group textarea {
-      width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; outline: none;
+      width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; outline: none; transition: 0.3s;
     }
-    .submit-btn { width: 100%; background: var(--blue); color: #fff; border: none; padding: 14px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,102,255,0.1); }
+    .submit-btn { width: 100%; background: var(--blue); color: #fff; border: none; padding: 14px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+    .submit-btn:hover { background: #0052cc; }
 
     /* 页脚 */
     footer { background: var(--navy); color: #fff; padding: 40px 5% 20px; }
     .footer-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; margin-bottom: 20px; }
     .footer-links { display: flex; gap: 25px; font-size: 13px; color: #94A3B8; }
+    .footer-links a:hover { color: #fff; }
     .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: #64748B; }
 
     /* 响应式调整 */
@@ -164,32 +171,32 @@
     </div>
     <nav>
       <a href="#" class="active">Home</a>
-      <a href="#">Products</a>
-      <a href="#">OEM / ODM</a>
-      <a href="#">About Us</a>
-      <a href="#">News</a>
-      <a href="#">Contact</a>
+      <a href="#products">Products</a>
+      <a href="#oem">OEM / ODM</a>
+      <a href="#about">About Us</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
     </nav>
     <div class="header-actions">
-      <button class="search-btn">🔍</button>
-      <button class="quote-btn">Get a Quote &rarr;</button>
+      <button class="search-btn" title="Search">🔍</button>
+      <a href="#contact" class="quote-btn">Get a Quote &rarr;</a>
     </div>
   </header>
 
-  <!-- 右侧悬浮按钮栏 -->
+  <!-- 右侧悬浮按钮栏（已绑定可点击链接） -->
   <div class="floating-sidebar">
-    <div class="sidebar-item">
+    <a href="#contact" class="sidebar-item">
       <span>💬</span>
       <span>Online Inquiry</span>
-    </div>
-    <div class="sidebar-item whatsapp">
+    </a>
+    <a href="https://wa.me/8615811854803" target="_blank" class="sidebar-item whatsapp">
       <span>📱</span>
       <span>WhatsApp</span>
-    </div>
-    <div class="sidebar-item email">
+    </a>
+    <a href="mailto:mossjaxxx@gmail.com" class="sidebar-item email">
       <span>✉️</span>
       <span>Email</span>
-    </div>
+    </a>
   </div>
 
   <!-- Hero 首屏内容区 -->
@@ -199,8 +206,7 @@
       <h1 class="hero-title">Reliable Packaging Solutions for <span>Global Manufacturers</span></h1>
       <p class="hero-desc">TAVENROX is a professional packaging machinery manufacturer, specializing in filling, capping, labeling and complete automated production lines. We deliver high-performance equipment to help your business grow.</p>
       <div class="hero-btns">
-        <a href="#" class="btn-primary">Explore Our Products &rarr;</a>
-        <a href="#" class="btn-secondary">▶ Watch Video</a>
+        <a href="#products" class="btn-primary">Explore Our Products &rarr;</a>
       </div>
       <div class="hero-features">
         <div class="feature-item"><div class="feature-icon">✓</div>Stable Performance</div>
@@ -219,13 +225,13 @@
   </section>
 
   <!-- 产品列表区 -->
-  <section class="products-section">
+  <section id="products" class="products-section">
     <div class="section-header">
       <div>
         <div class="section-tag">OUR PRODUCTS</div>
         <h2 class="section-title">Packaging Machinery for Your Business</h2>
       </div>
-      <a href="#" class="view-all">View All Products &rarr;</a>
+      <a href="#products" class="view-all">View All Products &rarr;</a>
     </div>
     <div class="product-grid">
       <div class="product-card">
@@ -233,39 +239,39 @@
         <div class="product-icon">🧴</div>
         <h3 class="product-title">Automatic Filling Machine</h3>
         <p class="product-desc">Accurate filling, stable performance, suitable for various liquids and products.</p>
-        <div class="product-link">&rarr;</div>
+        <a href="#contact" class="product-link">&rarr;</a>
       </div>
       <div class="product-card">
         <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Capping Machine">
         <div class="product-icon">🧴</div>
         <h3 class="product-title">Automatic Capping Machine</h3>
         <p class="product-desc">High speed and precision capping for different cap types and bottles.</p>
-        <div class="product-link">&rarr;</div>
+        <a href="#contact" class="product-link">&rarr;</a>
       </div>
       <div class="product-card">
         <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Labeling Machine">
         <div class="product-icon">🏷️</div>
         <h3 class="product-title">Automatic Labeling Machine</h3>
         <p class="product-desc">Accurate labeling, flexible application for round, square and special bottles.</p>
-        <div class="product-link">&rarr;</div>
+        <a href="#contact" class="product-link">&rarr;</a>
       </div>
       <div class="product-card">
         <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Production Line">
         <div class="product-icon">⚙️</div>
         <h3 class="product-title">Customized Automated Line</h3>
         <p class="product-desc">Tailored solutions for your specific production needs.</p>
-        <div class="product-link">&rarr;</div>
+        <a href="#contact" class="product-link">&rarr;</a>
       </div>
     </div>
   </section>
 
   <!-- OEM / ODM 定制服务区 -->
-  <section class="oem-section">
+  <section id="oem" class="oem-section">
     <div class="oem-content">
       <div class="oem-tag">OEM / ODM SERVICES</div>
       <h2 class="oem-title">Your Customized<br>Packaging Solution</h2>
       <p class="oem-desc">We provide flexible OEM/ODM services to meet your brand, product and production requirements. From machine configuration to complete lines, we turn your ideas into reality.</p>
-      <a href="#" class="oem-btn">Learn More &rarr;</a>
+      <a href="#contact" class="oem-btn">Learn More &rarr;</a>
       <div class="oem-features">
         <div class="oem-feature-item"><div class="oem-icon-box">✏️</div>Custom Design & Engineering</div>
         <div class="oem-feature-item"><div class="oem-icon-box">🏷️</div>Branding & Logo Customization</div>
@@ -285,62 +291,63 @@
   </section>
 
   <!-- 联系与询价区 -->
-  <section class="contact-section">
+  <section id="contact" class="contact-section">
     <div>
       <div class="section-tag">GET IN TOUCH</div>
       <h2 class="contact-title">Let’s Build Your Packaging Solution</h2>
       <p class="contact-desc">Have a project in mind? Contact us today for product details, quotation or OEM/ODM support. We're here to help.</p>
       
-      <div class="contact-info-card">
+      <a href="mailto:mossjaxxx@gmail.com" class="contact-info-card" style="display: flex;">
         <div class="contact-icon">✉️</div>
         <div>
           <div style="font-size:12px; color:var(--text-gray);">Email</div>
           <div style="font-weight:700; color:var(--navy);">mossjaxxx@gmail.com</div>
         </div>
-      </div>
-      <div class="contact-info-card">
+      </a>
+      <a href="https://wa.me/8615811854803" target="_blank" class="contact-info-card" style="display: flex;">
         <div class="contact-icon">📱</div>
         <div>
           <div style="font-size:12px; color:var(--text-gray);">WhatsApp / Phone</div>
           <div style="font-weight:700; color:var(--navy);">+86 15811854803</div>
         </div>
-      </div>
+      </a>
     </div>
 
-    <form class="inquiry-form" onsubmit="event.preventDefault(); alert('Inquiry sent successfully!');">
+    <!-- 真实发送邮件表单 -->
+    <form class="inquiry-form" action="https://formspree.io/f/xblywawz" method="POST">
       <div class="form-group">
         <label>Your Name</label>
-        <input type="text" placeholder="Enter your name" required>
+        <input type="text" name="name" placeholder="Enter your name" required>
       </div>
       <div class="form-group">
         <label>Email Address</label>
-        <input type="email" placeholder="Enter your email" required>
+        <input type="email" name="email" placeholder="Enter your email" required>
       </div>
       <div class="form-group">
         <label>Message / Requirements</label>
-        <textarea rows="4" placeholder="Tell us about your machine requirements..." required></textarea>
+        <textarea name="message" rows="4" placeholder="Tell us about your machine requirements..." required></textarea>
       </div>
       <button type="submit" class="submit-btn">Send Inquiry &rarr;</button>
     </form>
   </section>
 
   <!-- 页脚区 -->
-  <footer>
+  <footer id="about">
     <div class="footer-top">
       <div class="logo-container">
         <svg class="logo-icon" viewBox="0 0 100 80" style="width:30px;">
           <path d="M0 0 L100 0 L70 30 L0 30 Z" fill="#ffffff"/>
           <path d="M30 35 L70 35 L100 80 L65 80 L45 55 L30 80 L0 80 Z" fill="#0066FF"/>
         </svg>
-        <span style="font-weight:800; font-size:18px; letter-spacing:1px;">TAVENROX</span>
+        <span style="font-weight:800; font-size:18px; letter-spacing:1px; color:#fff;">TAVENROX</span>
       </div>
       <div class="footer-links">
         <a href="#">Home</a>
-        <a href="#">Products</a>
-        <a href="#">OEM / ODM</a>
-        <a href="#">About Us</a>
-        <a href="#">News</a>
-        <a href="#">Contact</a>
+        <a href="#products">Products</a>
+        <a href="#oem">OEM / ODM</a>
+        <a href="#about">About Us</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
     <div class="footer-bottom">
