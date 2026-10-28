@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Filling Machine - TAVENROX Packaging Machinery</title>
+  <style>
+    /* 基础重置与全局变量 */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
+    :root {
+      --navy: #0B2A4A;
+      --blue: #0066FF;
+      --light-blue: #F0F6FF;
+      --light-bg: #F8FAFC;
+      --text-dark: #1E293B;
+      --text-gray: #64748B;
+      --border-color: #E2E8F0;
+    }
+    body { color: var(--text-dark); background-color: #ffffff; line-height: 1.5; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* 顶部导航栏 */
+    header {
+      position: sticky; top: 0; background: #fff; border-bottom: 1px solid var(--border-color);
+      z-index: 1000; padding: 15px 5%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .logo-icon { width: 40px; height: 32px; fill: var(--navy); }
+    .brand-title { font-size: 24px; font-weight: 900; color: var(--navy); letter-spacing: 1.5px; line-height: 1; }
+    .brand-subtitle { font-size: 9px; font-weight: 700; color: var(--navy); letter-spacing: 2px; }
+
+    nav { display: flex; gap: 30px; align-items: center; }
+    nav a { font-size: 14px; font-weight: 600; color: #475569; position: relative; padding: 5px 0; transition: 0.3s; }
+    nav a:hover, nav a.active { color: var(--blue); }
+    nav a.active::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--blue); border-radius: 2px;
+    }
+
+    .header-actions { display: flex; align-items: center; gap: 20px; }
+    .search-btn { background: none; border: none; cursor: pointer; color: #475569; font-size: 16px; }
+    .quote-btn {
+      background: var(--blue); color: #fff; border: none; padding: 10px 22px; border-radius: 25px;
+      font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+      transition: 0.3s;
+    }
+    .quote-btn:hover { background: #0052cc; }
+
+    /* 右侧悬浮栏 */
+    .floating-sidebar {
+      position: fixed; right: 0; top: 40%; transform: translateY(-50%); z-index: 999; display: flex; flex-direction: column; gap: 2px;
+    }
+    .sidebar-item {
+      background: var(--blue); color: #fff; padding: 12px 15px; display: flex; flex-direction: column; align-items: center;
+      font-size: 11px; font-weight: 600; gap: 4px; border-radius: 8px 0 0 8px; cursor: pointer; transition: 0.3s; text-decoration: none;
+    }
+    .sidebar-item.whatsapp { background: #10B981; }
+    .sidebar-item.email { background: var(--navy); }
+    .sidebar-item:hover { padding-left: 20px; }
+
+    /* 1. 产品 Hero 头部视口 */
+    .product-hero {
+      background: linear-gradient(135deg, #F0F6FF 0%, #FFFFFF 60%);
+      padding: 60px 5% 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+    }
+    .product-tag { color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+    .product-main-title { font-size: 42px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
+    .product-subtitle-features { font-size: 14px; font-weight: 600; color: var(--text-gray); margin-bottom: 20px; }
+    .product-subtitle-features span { margin: 0 10px; color: var(--border-color); }
+    .product-intro-text { font-size: 14px; color: var(--text-gray); max-width: 520px; margin-bottom: 30px; line-height: 1.6; }
+    
+    .product-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 35px; }
+    .product-hl-item { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; color: var(--navy); }
+    .product-hl-icon { width: 32px; height: 32px; background: #E0F2FE; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--blue); flex-shrink: 0; }
+
+    .hero-btn-group { display: flex; gap: 15px; }
+    .btn-blue { background: var(--blue); color: #fff; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: 0.3s; display: inline-block; }
+    .btn-blue:hover { background: #0052cc; }
+    .btn-outline { border: 1px solid var(--border-color); background: #fff; color: var(--navy); padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+
+    .hero-image-wrap { position: relative; text-align: right; }
+    .main-product-img { width: 100%; max-width: 580px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+    .hero-badge-overlay {
+      position: absolute; bottom: -20px; left: 20px; background: #fff; padding: 12px 24px; border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-left: 4px solid var(--blue); text-align: left;
+    }
+    .badge-title { font-weight: 700; font-size: 14px; color: var(--navy); }
+    .badge-sub { font-size: 12px; color: var(--text-gray); }
+
+    /* 2. 产品概览与技术参数区 (PRODUCT OVERVIEW & TECHNICAL SPECIFICATIONS) */
+    .overview-spec-section { padding: 80px 5%; background: #fff; display: grid; grid-template-columns: 1fr 340px 1.1fr; gap: 35px; align-items: flex-start; }
+    .overview-tag { color: var(--blue); font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+    .overview-title { font-size: 30px; font-weight: 800; color: var(--navy); margin-bottom: 15px; }
+    .overview-text { font-size: 14px; color: var(--text-gray); margin-bottom: 25px; line-height: 1.6; }
+    .check-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+    .check-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--navy); }
+    .check-icon { width: 20px; height: 20px; background: var(--blue); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+
+    .detail-img-box img { width: 100%; height: 380px; object-fit: cover; border-radius: 12px; }
+
+    /* 技术参数表格 */
+    .specs-card { background: var(--light-blue); border-radius: 12px; padding: 25px; }
+    .specs-card-title { font-size: 12px; font-weight: 700; color: var(--blue); text-transform: uppercase; margin-bottom: 15px; letter-spacing: 0.5px; }
+    .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    .spec-table tr { border-bottom: 1px solid rgba(0, 102, 255, 0.1); }
+    .spec-table td { padding: 10px 0; font-size: 13px; }
+    .spec-label { color: var(--navy); font-weight: 600; width: 40%; }
+    .spec-val { color: var(--text-gray); }
+
+    /* 3. 为什么选择我们 (WHY CHOOSE TAVENROX) */
+    .partner-section {
+      background: var(--navy); color: #fff; display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .partner-content { padding: 80px 8% 80px 10%; }
+    .partner-tag { color: #38BDF8; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+    .partner-title { font-size: 34px; font-weight: 800; margin-bottom: 15px; line-height: 1.2; }
+    .partner-desc { font-size: 14px; color: #94A3B8; margin-bottom: 30px; line-height: 1.6; }
+    .partner-btn { display: inline-block; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 12px 28px; border-radius: 25px; font-weight: 600; transition: 0.3s; }
+    .partner-btn:hover { background: rgba(255,255,255,0.1); }
+    
+    .partner-features { display: flex; flex-direction: column; gap: 15px; }
+    .partner-feature-item { display: flex; align-items: center; gap: 15px; font-size: 13px; font-weight: 600; }
+    .partner-icon-box { width: 40px; height: 40px; background: rgba(0, 102, 255, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--blue); flex-shrink: 0; }
+
+    .partner-image-side { position: relative; background-size: cover; background-position: center; min-height: 400px; }
+
+    /* 4. 相关产品推荐 (RELATED PRODUCTS) */
+    .related-section { padding: 80px 5%; background: var(--light-bg); }
+    .related-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+    .related-tag { color: var(--blue); font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+    .related-title { font-size: 30px; font-weight: 800; color: var(--navy); }
+    
+    .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .related-card {
+      background: #fff; border-radius: 12px; border: 1px solid var(--border-color); padding: 25px;
+      display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s;
+    }
+    .related-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.06); }
+    .related-img { width: 100%; height: 160px; object-fit: contain; margin-bottom: 20px; }
+    .related-card-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .related-card-desc { font-size: 12px; color: var(--text-gray); margin-bottom: 20px; line-height: 1.5; }
+    
+    .custom-card {
+      background: #E0F2FE40; border-radius: 12px; border: 1px dashed var(--blue); padding: 30px;
+      display: flex; flex-direction: column; justify-content: center; text-
