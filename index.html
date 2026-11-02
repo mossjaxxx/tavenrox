@@ -88,9 +88,9 @@
     .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
     .product-card {
       background: var(--light-bg); border-radius: 12px; border: 1px solid var(--border-color); padding: 25px;
-      transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
+      transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: inherit;
     }
-    .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-color: var(--blue); }
     .product-img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 20px; }
     .product-icon { width: 40px; height: 40px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 15px; }
     .product-title { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
@@ -221,38 +221,51 @@
       <a href="#products" class="view-all">View All Products &rarr;</a>
     </div>
     <div class="product-grid">
-      <!-- 自动灌装机：已完美链接到 filling-machine.html -->
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Filling Machine">
-        <div class="product-icon">🧴</div>
-        <h3 class="product-title">Automatic Filling Machine</h3>
-        <p class="product-desc">Accurate filling, stable performance, suitable for various liquids and products.</p>
-        <a href="filling-machine.html" class="product-link">&rarr;</a>
-      </div>
+      
+      <!-- 1. Automatic Filling Machine -->
+      <a href="filling-machine.html" class="product-card">
+        <div>
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Filling Machine">
+          <div class="product-icon">🧴</div>
+          <h3 class="product-title">Automatic Filling Machine</h3>
+          <p class="product-desc">Accurate filling, stable performance, suitable for various liquids and products.</p>
+        </div>
+        <span class="product-link">&rarr;</span>
+      </a>
 
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Capping Machine">
-        <div class="product-icon">🧴</div>
-        <h3 class="product-title">Automatic Capping Machine</h3>
-        <p class="product-desc">High speed and precision capping for different cap types and bottles.</p>
-        <a href="#contact" class="product-link">&rarr;</a>
-      </div>
+      <!-- 2. Automatic Capping Machine -->
+      <a href="capping-machine.html" class="product-card">
+        <div>
+          <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Capping Machine">
+          <div class="product-icon">🧴</div>
+          <h3 class="product-title">Automatic Capping Machine</h3>
+          <p class="product-desc">High speed and precision capping for different cap types and bottles.</p>
+        </div>
+        <span class="product-link">&rarr;</span>
+      </a>
 
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Labeling Machine">
-        <div class="product-icon">🏷️</div>
-        <h3 class="product-title">Automatic Labeling Machine</h3>
-        <p class="product-desc">Accurate labeling, flexible application for round, square and special bottles.</p>
-        <a href="#contact" class="product-link">&rarr;</a>
-      </div>
+      <!-- 3. Automatic Labeling Machine -->
+      <a href="labeling-machine.html" class="product-card">
+        <div>
+          <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Labeling Machine">
+          <div class="product-icon">🏷️</div>
+          <h3 class="product-title">Automatic Labeling Machine</h3>
+          <p class="product-desc">Accurate labeling, flexible application for round, square and special bottles.</p>
+        </div>
+        <span class="product-link">&rarr;</span>
+      </a>
 
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Production Line">
-        <div class="product-icon">⚙️</div>
-        <h3 class="product-title">Customized Automated Line</h3>
-        <p class="product-desc">Tailored solutions for your specific production needs.</p>
-        <a href="#contact" class="product-link">&rarr;</a>
-      </div>
+      <!-- 4. Customized Automated Line -->
+      <a href="automated-line.html" class="product-card">
+        <div>
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Production Line">
+          <div class="product-icon">⚙️</div>
+          <h3 class="product-title">Customized Automated Line</h3>
+          <p class="product-desc">Tailored solutions for your specific production needs.</p>
+        </div>
+        <span class="product-link">&rarr;</span>
+      </a>
+
     </div>
   </section>
 
@@ -305,4 +318,43 @@
     <form class="inquiry-form" action="https://formspree.io/f/xblywawz" method="POST">
       <div class="form-group">
         <label>Your Name</label>
-        <input type="text" name="name" placeholder="Enter your name"
+        <input type="text" name="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label>Message / Requirements</label>
+        <textarea name="message" rows="4" placeholder="Tell us about your machine requirements..." required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Inquiry &rarr;</button>
+    </form>
+  </section>
+
+  <footer id="about">
+    <div class="footer-top">
+      <div class="logo-container">
+        <svg class="logo-icon" viewBox="0 0 100 80" style="width:30px;">
+          <path d="M0 0 L100 0 L70 30 L0 30 Z" fill="#ffffff"/>
+          <path d="M30 35 L70 35 L100 80 L65 80 L45 55 L30 80 L0 80 Z" fill="#0066FF"/>
+        </svg>
+        <span style="font-weight:800; font-size:18px; letter-spacing:1px; color:#fff;">TAVENROX</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#products">Products</a>
+        <a href="#oem">OEM / ODM</a>
+        <a href="#about">About Us</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 TAVENROX. All rights reserved.</div>
+      <div>Precision · Reliability · Innovation</div>
+    </div>
+  </footer>
+
+</body>
+</html>
