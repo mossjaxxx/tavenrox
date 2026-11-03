@@ -22,11 +22,8 @@
       position: sticky; top: 0; background: #fff; border-bottom: 1px solid var(--border-color);
       z-index: 1000; padding: 15px 5%; display: flex; align-items: center; justify-content: space-between;
     }
-    .logo-container { display: flex; align-items: center; gap: 12px; }
-    .brand-logo-img { height: 38px; width: auto; object-fit: contain; }
-    .brand-text-wrap { display: flex; flex-direction: column; }
-    .brand-title { font-size: 22px; font-weight: 900; color: var(--navy); letter-spacing: 1.5px; line-height: 1.1; }
-    .brand-subtitle { font-size: 8px; font-weight: 700; color: var(--navy); letter-spacing: 2px; }
+    .logo-container { display: flex; align-items: center; }
+    .brand-logo-img { height: 42px; width: auto; object-fit: contain; }
 
     nav { display: flex; gap: 30px; align-items: center; }
     nav a { font-size: 14px; font-weight: 600; color: #475569; position: relative; padding: 5px 0; transition: 0.3s; }
@@ -109,16 +106,9 @@
 <body>
 
   <header>
-    <div class="logo-container">
-      <a href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <!-- 使用你的 LOGO/LOGO.svg 路径 -->
-        <img src="LOGO/LOGO.svg" alt="TAVENROX Logo" class="brand-logo-img">
-        <div class="brand-text-wrap">
-          <div class="brand-title">TAVENROX</div>
-          <div class="brand-subtitle">PACKAGING MACHINERY</div>
-        </div>
-      </a>
-    </div>
+    <a href="index.html" class="logo-container">
+      <img src="LOGO/LOGO.svg" alt="TAVENROX Logo" class="brand-logo-img">
+    </a>
     <nav>
       <a href="index.html" class="active">Home</a>
       <a href="#products">Products</a>
@@ -237,10 +227,9 @@
 
   <footer>
     <div class="footer-top">
-      <div class="logo-container">
-        <img src="LOGO/LOGO.svg" alt="TAVENROX Logo" style="height:30px; width:auto;">
-        <span style="font-weight:800; font-size:18px; letter-spacing:1px; color:#fff; margin-left:10px;">TAVENROX</span>
-      </div>
+      <a href="index.html" class="logo-container">
+        <img src="LOGO/LOGO.svg" alt="TAVENROX Logo" style="height:34px; width:auto;">
+      </a>
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="#products">Products</a>
