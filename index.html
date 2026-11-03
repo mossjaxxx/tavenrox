@@ -84,21 +84,42 @@
     .product-desc { font-size: 13px; color: var(--text-gray); margin-bottom: 20px; line-height: 1.5; }
     .product-link { font-size: 14px; font-weight: 700; color: var(--blue); display: flex; align-items: center; gap: 5px; }
 
-    /* 恢复的完整联系与询盘表单样式 */
+    /* 重新设计的全新左右分栏询盘与联系方式板块 */
     .contact-section { padding: 80px 5%; background: var(--light-bg); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; max-width: 1100px; margin: 0 auto; align-items: start; }
-    .contact-info-box { background: var(--navy); color: #fff; padding: 40px; border-radius: 12px; }
-    .contact-info-title { font-size: 26px; font-weight: 800; margin-bottom: 15px; }
-    .contact-info-desc { font-size: 14px; color: #94A3B8; margin-bottom: 30px; line-height: 1.6; }
-    .info-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; font-size: 14px; color: #E2E8F0; }
-    .info-icon { width: 36px; height: 36px; background: rgba(0,102,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--blue); flex-shrink: 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; max-width: 1100px; margin: 0 auto; align-items: stretch; }
+    
+    .contact-info-card {
+      background: linear-gradient(135deg, var(--navy) 0%, #133E6B 100%);
+      color: #fff; padding: 45px; border-radius: 16px; display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: 0 15px 35px rgba(11, 42, 74, 0.15);
+    }
+    .contact-info-title { font-size: 26px; font-weight: 800; margin-bottom: 15px; line-height: 1.3; }
+    .contact-info-desc { font-size: 14px; color: #CBD5E1; margin-bottom: 30px; line-height: 1.6; }
+    
+    .contact-methods { display: flex; flex-direction: column; gap: 20px; }
+    .method-item { display: flex; align-items: center; gap: 15px; font-size: 14px; color: #F1F5F9; }
+    .method-icon {
+      width: 44px; height: 44px; background: rgba(255, 255, 255, 0.1); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .method-label { font-size: 12px; color: #94A3B8; display: block; margin-bottom: 2px; }
+    .method-value { font-weight: 600; color: #fff; }
 
-    .contact-form-box { background: #fff; padding: 40px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+    .contact-form-card {
+      background: #fff; padding: 45px; border-radius: 16px; border: 1px solid var(--border-color);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+    }
     .form-group { margin-bottom: 20px; }
     .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
-    .form-input, .form-textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; outline: none; transition: 0.3s; }
-    .form-input:focus, .form-textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,102,255,0.1); }
-    .form-textarea { height: 120px; resize: vertical; }
+    .form-input, .form-textarea {
+      width: 100%; padding: 14px; border: 1px solid var(--border-color); border-radius: 8px;
+      font-size: 14px; outline: none; transition: 0.3s; background: #F8FAFC;
+    }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+    }
+    .form-textarea { height: 130px; resize: vertical; }
 
     footer { background: var(--navy); color: #fff; padding: 40px 5% 20px; }
     .footer-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; margin-bottom: 20px; }
@@ -207,7 +228,7 @@
     </div>
   </section>
 
-  <!-- 恢复完整的联系方式与表单板块 -->
+  <!-- 全新设计的询盘与联系方式板块 -->
   <section id="contact" class="contact-section">
     <div class="section-header">
       <div class="section-tag">GET IN TOUCH</div>
@@ -216,39 +237,58 @@
     </div>
 
     <div class="contact-grid">
-      <div class="contact-info-box">
-        <h3 class="contact-info-title">Let's Discuss Your Project</h3>
-        <p class="contact-info-desc">We offer professional engineering support, custom packaging lines, and OEM/ODM services worldwide.</p>
+      <!-- 左侧：联系方式卡片 -->
+      <div class="contact-info-card">
+        <div>
+          <h3 class="contact-info-title">Let's Discuss Your Packaging Project</h3>
+          <p class="contact-info-desc">We provide professional engineering consultation, customized machinery solutions, and global after-sales support.</p>
+        </div>
         
-        <div class="info-item">
-          <div class="info-icon">📍</div>
-          <div><strong>Address:</strong><br>Packaging Machinery Industrial Zone, China</div>
+        <div class="contact-methods">
+          <div class="method-item">
+            <div class="method-icon">✉️</div>
+            <div>
+              <span class="method-label">Direct Email</span>
+              <span class="method-value">mossjaxxx@gmail.com</span>
+            </div>
+          </div>
+          <div class="method-item">
+            <div class="method-icon">📱</div>
+            <div>
+              <span class="method-label">Phone / WhatsApp</span>
+              <span class="method-value">+86 15811854803</span>
+            </div>
+          </div>
+          <div class="method-item">
+            <div class="method-icon">📍</div>
+            <div>
+              <span class="method-label">Location</span>
+              <span class="method-value">Packaging Machinery Industrial Hub, China</span>
+            </div>
+          </div>
         </div>
-        <div class="info-item">
-          <div class="info-icon">✉️</div>
-          <div><strong>Email:</strong><br>mossjaxxx@gmail.com</div>
-        </div>
-        <div class="info-item">
-          <div class="info-icon">📱</div>
-          <div><strong>WhatsApp:</strong><br>+86 15811854803</div>
+
+        <div style="font-size: 12px; color: #94A3B8; margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+          Working Hours: Mon - Sat: 8:30 AM - 6:00 PM (GMT+8)
         </div>
       </div>
 
-      <div class="contact-form-box">
+      <!-- 右侧：询盘表单卡片 -->
+      <div class="contact-form-card">
         <form action="https://formspree.io/f/your-form-id" method="POST">
           <div class="form-group">
             <label class="form-label">Your Name</label>
-            <input type="text" name="name" class="form-input" placeholder="John Doe" required>
+            <input type="text" name="name" class="form-input" placeholder="e.g. John Smith" required>
           </div>
           <div class="form-group">
             <label class="form-label">Email Address</label>
-            <input type="email" name="email" class="form-input" placeholder="john@example.com" required>
+            <input type="email" name="email" class="form-input" placeholder="e.g. john@example.com" required>
           </div>
           <div class="form-group">
             <label class="form-label">Project Details / Requirements</label>
-            <textarea name="message" class="form-textarea" placeholder="Please describe your product, bottle type, and required capacity..." required></textarea>
+            <textarea name="message" class="form-textarea" placeholder="Please describe your bottle type, filling liquid, and required production speed..." required></textarea>
           </div>
-          <button type="submit" class="btn-blue" style="width:100%; border:none; cursor:pointer; font-size:16px;">Send Inquiry &rarr;</button>
+          <button type="submit" class="btn-blue" style="width:100%; border:none; cursor:pointer; font-size:15px; padding: 14px; border-radius: 8px;">Send Inquiry &rarr;</button>
         </form>
       </div>
     </div>
