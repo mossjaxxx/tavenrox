@@ -68,7 +68,7 @@
     .hero-img-wrap img { width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
 
     .products-section { padding: 80px 5%; background: #fff; }
-    .section-header { text-align: center; max-width: 600px; margin: 0 auto 50px; }
+    .section-header { text-align: center; max-width: 650px; margin: 0 auto 50px; }
     .section-tag { color: var(--blue); font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
     .section-title { font-size: 34px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
     .section-desc { font-size: 14px; color: var(--text-gray); }
@@ -84,7 +84,36 @@
     .product-desc { font-size: 13px; color: var(--text-gray); margin-bottom: 20px; line-height: 1.5; }
     .product-link { font-size: 14px; font-weight: 700; color: var(--blue); display: flex; align-items: center; gap: 5px; }
 
-    /* 重新设计的全新左右分栏询盘与联系方式板块 */
+    /* ====== 新增：工厂实力与资质板块样式 ====== */
+    .factory-section { padding: 80px 5%; background: #ffffff; border-top: 1px solid var(--border-color); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 60px; }
+    .stat-card {
+      background: var(--light-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px 20px; text-align: center;
+      transition: 0.3s;
+    }
+    .stat-card:hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: 0 10px 25px rgba(0,102,255,0.08); }
+    .stat-number { font-size: 38px; font-weight: 900; color: var(--blue); margin-bottom: 5px; line-height: 1; }
+    .stat-label { font-size: 13px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .factory-content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .factory-text-side h3 { font-size: 28px; font-weight: 800; color: var(--navy); margin-bottom: 15px; }
+    .factory-text-side p { font-size: 14px; color: var(--text-gray); line-height: 1.7; margin-bottom: 25px; }
+    
+    .strength-features { display: flex; flex-direction: column; gap: 16px; margin-bottom: 30px; }
+    .strength-item { display: flex; align-items: flex-start; gap: 14px; }
+    .strength-icon { width: 32px; height: 32px; background: var(--light-blue); color: var(--blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 14px; }
+    .strength-info h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .strength-info p { font-size: 13px; color: var(--text-gray); margin-bottom: 0; }
+
+    .factory-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .gallery-img { width: 100%; height: 210px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+    .gallery-badge-card {
+      background: var(--navy); color: #fff; border-radius: 12px; padding: 25px; display: flex; flex-direction: column; justify-content: center;
+    }
+    .gallery-badge-title { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: #38BDF8; }
+    .gallery-badge-desc { font-size: 12px; color: #CBD5E1; line-height: 1.5; }
+
+    /* 左右分栏询盘与联系方式板块 */
     .contact-section { padding: 80px 5%; background: var(--light-bg); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; max-width: 1100px; margin: 0 auto; align-items: stretch; }
     
@@ -127,7 +156,7 @@
     .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: #64748B; }
 
     @media (max-width: 992px) {
-      .hero-section, .products-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-section, .products-grid, .contact-grid, .stats-grid, .factory-content-grid, .factory-gallery { grid-template-columns: 1fr; }
       nav { display: none; }
     }
   </style>
@@ -141,9 +170,8 @@
     <nav>
       <a href="index.html" class="active">Home</a>
       <a href="#products">Products</a>
+      <a href="#about">About Factory</a>
       <a href="#oem">OEM / ODM</a>
-      <a href="#about">About Us</a>
-      <a href="#news">News</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="header-actions">
@@ -228,7 +256,81 @@
     </div>
   </section>
 
-  <!-- 全新设计的询盘与联系方式板块 -->
+  <!-- ====== 新增：工厂实力与资质板块 (Factory Strength & Qualifications) ====== -->
+  <section id="about" class="factory-section">
+    <div class="section-header">
+      <div class="section-tag">FACTORY STRENGTH & QUALIFICATIONS</div>
+      <h2 class="section-title">Built for Industry Leadership</h2>
+      <p class="section-desc">With state-of-the-art manufacturing facilities, ISO/CE certifications, and decades of engineering excellence, TAVENROX guarantees top-tier machinery reliability.</p>
+    </div>
+
+    <!-- 关键数据卡片栏 -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">15,000+</div>
+        <div class="stat-label">Square Meters Factory Area</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Global Export Countries</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">R&D Engineers & Tech Experts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1,200+</div>
+        <div class="stat-label">Turnkey Lines Delivered</div>
+      </div>
+    </div>
+
+    <!-- 图文结合详细工厂实力说明 -->
+    <div class="factory-content-grid">
+      <div class="factory-text-side">
+        <h3>Precision Engineering Meets Rigid Quality Standards</h3>
+        <p>At TAVENROX, every machine is crafted in our modern industrial park under strict ISO9001 management protocols. From high-accuracy CNC machining of core spare parts to automated assembly line testing, we maintain complete control over design, durability, and performance.</p>
+
+        <div class="strength-features">
+          <div class="strength-item">
+            <div class="strength-icon">✓</div>
+            <div class="strength-info">
+              <h4>CE & ISO 9001 Certified Quality</h4>
+              <p>All packaging machinery fully complies with international CE safety directives and food-grade hygienic standards.</p>
+            </div>
+          </div>
+          <div class="strength-item">
+            <div class="strength-icon">✓</div>
+            <div class="strength-info">
+              <h4>Advanced In-House CNC Machining</h4>
+              <p>Equipped with high-precision CNC lathe processing for durable 304/316 stainless steel machine frameworks.</p>
+            </div>
+          </div>
+          <div class="strength-item">
+            <div class="strength-icon">✓</div>
+            <div class="strength-info">
+              <h4>Turnkey Customization & FAT Testing</h4>
+              <p>We provide full layout design, FAT (Factory Acceptance Testing) before shipment, and overseas engineering dispatch.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#contact" class="btn-blue">Request Factory Audit Report &rarr;</a>
+      </div>
+
+      <!-- 工厂实景图与资质证书预留画廊 -->
+      <div class="factory-gallery">
+        <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="TAVENROX Modern CNC Workshop">
+        <div class="gallery-badge-card">
+          <div class="gallery-badge-title">Verified Supplier</div>
+          <div class="gallery-badge-desc">Inspected by leading international testing agencies (SGS / TÜV). Complete qualification documents available upon inquiry.</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="Assembly Workshop">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="Quality Control Line">
+      </div>
+    </div>
+  </section>
+
+  <!-- 询盘与联系方式板块 -->
   <section id="contact" class="contact-section">
     <div class="section-header">
       <div class="section-tag">GET IN TOUCH</div>
@@ -302,9 +404,8 @@
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="#products">Products</a>
+        <a href="#about">About Factory</a>
         <a href="#oem">OEM / ODM</a>
-        <a href="#about">About Us</a>
-        <a href="#news">News</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
