@@ -52,10 +52,30 @@
     .sidebar-item.email { background: var(--navy); }
     .sidebar-item:hover { padding-left: 20px; }
 
+    /* ====== 修改后的 Hero 区域全屏铺满样式 ====== */
     .hero-section {
+      position: relative;
+      width: 100%;
+      min-height: 85vh;
       background: linear-gradient(135deg, #F0F6FF 0%, #FFFFFF 60%);
-      padding: 80px 5%; display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; align-items: center;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 60px 5%;
     }
+
+    .hero-container {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.1fr 1.3fr;
+      gap: 30px;
+      align-items: center;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
     .hero-tag { color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
     .hero-title { font-size: 48px; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 20px; }
     .hero-desc { font-size: 15px; color: var(--text-gray); margin-bottom: 35px; line-height: 1.6; max-width: 560px; }
@@ -65,7 +85,21 @@
     .btn-outline { border: 1px solid var(--border-color); background: #fff; color: var(--navy); padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
     .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
 
-    .hero-img-wrap img { width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.06); object-fit: cover; }
+    /* 图片全铺满处理 */
+    .hero-img-wrap {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-img-wrap img {
+      width: 100%;
+      max-height: 75vh;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(11, 42, 74, 0.08);
+    }
 
     .products-section { padding: 80px 5%; background: #fff; }
     .section-header { text-align: center; max-width: 650px; margin: 0 auto 50px; }
@@ -156,7 +190,8 @@
     .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: #64748B; }
 
     @media (max-width: 992px) {
-      .hero-section, .products-grid, .contact-grid, .stats-grid, .factory-content-grid, .factory-gallery { grid-template-columns: 1fr; }
+      .hero-container { grid-template-columns: 1fr; }
+      .products-grid, .contact-grid, .stats-grid, .factory-content-grid, .factory-gallery { grid-template-columns: 1fr; }
       nav { display: none; }
     }
   </style>
@@ -196,18 +231,19 @@
   </div>
 
   <section class="hero-section">
-    <div>
-      <div class="hero-tag">EXCELLENCE IN PACKAGING SOLUTIONS</div>
-      <h1 class="hero-title">Smart & Reliable Packaging Machinery</h1>
-      <p class="hero-desc">TAVENROX delivers high-performance filling, capping, labeling, and turnkey automated production lines tailored for global food, beverage, pharmaceutical, and chemical industries.</p>
-      <div class="hero-btn-group">
-        <a href="#products" class="btn-blue">Explore Products &rarr;</a>
-        <a href="#contact" class="btn-outline">Contact Us</a>
+    <div class="hero-container">
+      <div>
+        <div class="hero-tag">EXCELLENCE IN PACKAGING SOLUTIONS</div>
+        <h1 class="hero-title">Smart & Reliable Packaging Machinery</h1>
+        <p class="hero-desc">TAVENROX delivers high-performance filling, capping, labeling, and turnkey automated production lines tailored for global food, beverage, pharmaceutical, and chemical industries.</p>
+        <div class="hero-btn-group">
+          <a href="#products" class="btn-blue">Explore Products &rarr;</a>
+          <a href="#contact" class="btn-outline">Contact Us</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-img-wrap">
-      <!-- 展示大图已替换为你的路径：images/Capping machine Banner.svg -->
-      <img src="images/Capping machine Banner.svg" alt="Smart & Reliable Packaging Machinery">
+      <div class="hero-img-wrap">
+        <img src="images/Capping machine Banner.svg" alt="Smart & Reliable Packaging Machinery">
+      </div>
     </div>
   </section>
 
