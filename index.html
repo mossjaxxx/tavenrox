@@ -57,7 +57,7 @@
     .sidebar-item.email { background: var(--navy); }
     .sidebar-item:hover { padding-left: 20px; }
 
-    /* ====== 严格按照 1920x940 铺满全屏展示的 Hero 样式 ====== */
+    /* ====== 1920x940 铺满全屏展示的 Hero 样式 ====== */
     .hero-section {
       position: relative;
       width: 100vw;
@@ -85,33 +85,83 @@
       z-index: 1;
     }
 
-    /* 渐变防护层，确保左侧文案在铺满大图上清晰醒目 */
+    /* 渐变遮罩层，确保文案清晰呈现 */
     .hero-mask {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, rgba(240, 246, 255, 0.92) 0%, rgba(240, 246, 255, 0.75) 40%, rgba(255, 255, 255, 0) 80%);
+      background: linear-gradient(90deg, rgba(240, 246, 255, 0.94) 0%, rgba(240, 246, 255, 0.82) 42%, rgba(255, 255, 255, 0) 85%);
       z-index: 2;
     }
 
-    /* 画面左侧文案与按钮容器 */
+    /* ====== 修改：文案往中间移动 + 放大字号突出显示 ====== */
     .hero-content {
       position: relative;
       z-index: 3;
-      padding-left: 5%;
-      max-width: 680px;
+      padding-left: 8%; /* 增大左边距，使文案向中央平移 */
+      max-width: 720px;  /* 增加最大宽度容纳放大后的文本 */
     }
 
-    .hero-tag { color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
-    .hero-title { font-size: 48px; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 20px; }
-    .hero-desc { font-size: 15px; color: #334155; margin-bottom: 35px; line-height: 1.6; max-width: 560px; font-weight: 500; }
-    .hero-btn-group { display: flex; gap: 15px; }
-    .btn-blue { background: var(--blue); color: #fff; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: 0.3s; display: inline-block; }
-    .btn-blue:hover { background: #0052cc; }
-    .btn-outline { border: 1px solid var(--border-color); background: rgba(255, 255, 255, 0.9); color: var(--navy); padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
-    .btn-outline:hover { border-color: var(--blue); color: var(--blue); background: #fff; }
+    .hero-tag {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    /* 放大主标题 */
+    .hero-title {
+      font-size: 54px; /* 原 48px -> 放大至 54px */
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 22px;
+      letter-spacing: -0.5px;
+    }
+
+    /* 放大副标题描述文案 */
+    .hero-desc {
+      font-size: 17px; /* 原 15px -> 放大至 17px */
+      color: #334155;
+      margin-bottom: 38px;
+      line-height: 1.65;
+      max-width: 620px;
+      font-weight: 500;
+    }
+
+    /* 放大按钮尺寸提升点击感 */
+    .hero-btn-group { display: flex; gap: 18px; }
+    .btn-blue {
+      background: var(--blue);
+      color: #fff;
+      padding: 14px 32px; /* 适度加大内边距 */
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: 0.3s;
+      display: inline-block;
+      box-shadow: 0 8px 20px rgba(0, 102, 255, 0.2);
+    }
+    .btn-blue:hover { background: #0052cc; transform: translateY(-2px); }
+    
+    .btn-outline {
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--navy);
+      padding: 14px 28px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.3s;
+    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); background: #fff; transform: translateY(-2px); }
 
     .products-section { padding: 80px 5%; background: #fff; }
     .section-header { text-align: center; max-width: 650px; margin: 0 auto 50px; }
@@ -202,7 +252,9 @@
     .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: #64748B; }
 
     @media (max-width: 992px) {
-      .hero-section { aspect-ratio: auto; min-height: 500px; padding: 40px 5%; }
+      .hero-section { aspect-ratio: auto; min-height: 520px; padding: 40px 5%; }
+      .hero-content { padding-left: 0; }
+      .hero-title { font-size: 38px; }
       .hero-mask { background: linear-gradient(180deg, rgba(240, 246, 255, 0.95) 0%, rgba(240, 246, 255, 0.85) 100%); }
       .products-grid, .contact-grid, .stats-grid, .factory-content-grid, .factory-gallery { grid-template-columns: 1fr; }
       nav { display: none; }
@@ -251,7 +303,7 @@
     <!-- 半透明保护遮罩层 -->
     <div class="hero-mask"></div>
 
-    <!-- 左侧文案与按钮（完全保留原有内容） -->
+    <!-- 左侧文案与按钮（向中间偏移 + 大字号突出） -->
     <div class="hero-content">
       <div class="hero-tag">EXCELLENCE IN PACKAGING SOLUTIONS</div>
       <h1 class="hero-title">Smart & Reliable Packaging Machinery</h1>
