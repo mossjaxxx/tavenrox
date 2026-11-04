@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TAVENROX - Packaging Machinery Manufacturer</title>
+  
+  <!-- 性能优化：优先预加载 Hero 全屏大图，极大提升首屏打开速度 -->
+  <link rel="preload" as="image" href="images/Capping machine Banner.svg" type="image/svg+xml">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
     :root {
@@ -19,8 +23,9 @@
     a { text-decoration: none; color: inherit; }
 
     header {
-      position: sticky; top: 0; background: #fff; border-bottom: 1px solid var(--border-color);
-      z-index: 1000; padding: 15px 5%; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color); z-index: 1000; padding: 15px 5%;
+      display: flex; align-items: center; justify-content: space-between;
     }
     .logo-container { display: flex; align-items: center; }
     .brand-logo-img { height: 42px; width: auto; object-fit: contain; }
@@ -52,54 +57,55 @@
     .sidebar-item.email { background: var(--navy); }
     .sidebar-item:hover { padding-left: 20px; }
 
-    /* ====== 修改后的 Hero 区域全屏铺满样式 ====== */
+    /* ====== 真正全屏铺满 (Full Cover) Hero 样式 ====== */
     .hero-section {
       position: relative;
       width: 100%;
       min-height: 85vh;
-      background: linear-gradient(135deg, #F0F6FF 0%, #FFFFFF 60%);
       display: flex;
       align-items: center;
+      padding: 80px 5%;
       overflow: hidden;
-      padding: 60px 5%;
+      background-color: var(--navy);
     }
 
-    .hero-container {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 1.1fr 1.3fr;
-      gap: 30px;
-      align-items: center;
+    /* 将 Banner 图片绝对定位铺满全屏 */
+    .hero-bg-img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+    }
+
+    /* 添加左侧半透明渐变蒙层，既能保证大图显示，又确保左侧白色/亮色文字绝对清晰 */
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 45%, rgba(255, 255, 255, 0.1) 100%);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 650px;
     }
 
     .hero-tag { color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
     .hero-title { font-size: 48px; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 20px; }
-    .hero-desc { font-size: 15px; color: var(--text-gray); margin-bottom: 35px; line-height: 1.6; max-width: 560px; }
+    .hero-desc { font-size: 15px; color: #334155; margin-bottom: 35px; line-height: 1.6; max-width: 560px; font-weight: 500; }
     .hero-btn-group { display: flex; gap: 15px; }
     .btn-blue { background: var(--blue); color: #fff; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: 0.3s; display: inline-block; }
     .btn-blue:hover { background: #0052cc; }
-    .btn-outline { border: 1px solid var(--border-color); background: #fff; color: var(--navy); padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
-    .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
-
-    /* 图片全铺满处理 */
-    .hero-img-wrap {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-img-wrap img {
-      width: 100%;
-      max-height: 75vh;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 20px 50px rgba(11, 42, 74, 0.08);
-    }
+    .btn-outline { border: 1px solid var(--border-color); background: rgba(255,255,255,0.9); color: var(--navy); padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); background: #fff; }
 
     .products-section { padding: 80px 5%; background: #fff; }
     .section-header { text-align: center; max-width: 650px; margin: 0 auto 50px; }
@@ -190,7 +196,7 @@
     .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: #64748B; }
 
     @media (max-width: 992px) {
-      .hero-container { grid-template-columns: 1fr; }
+      .hero-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%); }
       .products-grid, .contact-grid, .stats-grid, .factory-content-grid, .factory-gallery { grid-template-columns: 1fr; }
       nav { display: none; }
     }
@@ -230,23 +236,27 @@
     </a>
   </div>
 
+  <!-- ====== 真正全屏铺满 (Full-Bleed Cover) Hero 区域 ====== -->
   <section class="hero-section">
-    <div class="hero-container">
-      <div>
-        <div class="hero-tag">EXCELLENCE IN PACKAGING SOLUTIONS</div>
-        <h1 class="hero-title">Smart & Reliable Packaging Machinery</h1>
-        <p class="hero-desc">TAVENROX delivers high-performance filling, capping, labeling, and turnkey automated production lines tailored for global food, beverage, pharmaceutical, and chemical industries.</p>
-        <div class="hero-btn-group">
-          <a href="#products" class="btn-blue">Explore Products &rarr;</a>
-          <a href="#contact" class="btn-outline">Contact Us</a>
-        </div>
-      </div>
-      <div class="hero-img-wrap">
-        <img src="images/Capping machine Banner.svg" alt="Smart & Reliable Packaging Machinery">
+    <!-- 背景图片铺满，加入 fetchpriority 最高下载优先级提升加载速度 -->
+    <img src="images/Capping machine Banner.svg" alt="Smart & Reliable Packaging Machinery Background" class="hero-bg-img" fetchpriority="high">
+    
+    <!-- 渐变蒙版保证文字高质感与清晰度 -->
+    <div class="hero-overlay"></div>
+
+    <!-- 画面左侧内容区域，保持原有文案与按钮结构不变 -->
+    <div class="hero-content">
+      <div class="hero-tag">EXCELLENCE IN PACKAGING SOLUTIONS</div>
+      <h1 class="hero-title">Smart & Reliable Packaging Machinery</h1>
+      <p class="hero-desc">TAVENROX delivers high-performance filling, capping, labeling, and turnkey automated production lines tailored for global food, beverage, pharmaceutical, and chemical industries.</p>
+      <div class="hero-btn-group">
+        <a href="#products" class="btn-blue">Explore Products &rarr;</a>
+        <a href="#contact" class="btn-outline">Contact Us</a>
       </div>
     </div>
   </section>
 
+  <!-- 产品列表板块（全套添加 loading="lazy" 延迟加载，加速首页打开） -->
   <section id="products" class="products-section">
     <div class="section-header">
       <div class="section-tag">OUR PRODUCTS</div>
@@ -257,7 +267,7 @@
     <div class="products-grid">
       <a href="filling-machine.html" class="product-card">
         <div>
-          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Automatic Filling Machine">
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Automatic Filling Machine" loading="lazy">
           <h3 class="product-title">Automatic Filling Machine</h3>
           <p class="product-desc">Accurate liquid filling, stable performance, flexible nozzle configuration.</p>
         </div>
@@ -266,7 +276,7 @@
 
       <a href="capping-machine.html" class="product-card">
         <div>
-          <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Automatic Capping Machine">
+          <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Automatic Capping Machine" loading="lazy">
           <h3 class="product-title">Automatic Capping Machine</h3>
           <p class="product-desc">High torque precision and reliable cap sealing for universal bottle types.</p>
         </div>
@@ -275,7 +285,7 @@
 
       <a href="labeling-machine.html" class="product-card">
         <div>
-          <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Automatic Labeling Machine">
+          <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Automatic Labeling Machine" loading="lazy">
           <h3 class="product-title">Automatic Labeling Machine</h3>
           <p class="product-desc">High-speed, wrinkle-free labeling with intelligent smart optical sensors.</p>
         </div>
@@ -284,7 +294,7 @@
 
       <a href="automated-line.html" class="product-card">
         <div>
-          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Automated Production Line">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" class="product-img" alt="Automated Production Line" loading="lazy">
           <h3 class="product-title">Customized Automated Line</h3>
           <p class="product-desc">Turnkey plant solutions integrating unscrambling, filling, capping & packaging.</p>
         </div>
@@ -353,13 +363,13 @@
       </div>
 
       <div class="factory-gallery">
-        <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="TAVENROX Modern CNC Workshop">
+        <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="TAVENROX Modern CNC Workshop" loading="lazy">
         <div class="gallery-badge-card">
           <div class="gallery-badge-title">Verified Supplier</div>
           <div class="gallery-badge-desc">Inspected by leading international testing agencies (SGS / TÜV). Complete qualification documents available upon inquiry.</div>
         </div>
-        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="Assembly Workshop">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="Quality Control Line">
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="Assembly Workshop" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="Quality Control Line" loading="lazy">
       </div>
     </div>
   </section>
