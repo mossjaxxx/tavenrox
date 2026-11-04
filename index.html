@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TAVENROX - Packaging Machinery Manufacturer</title>
   
-  <!-- 性能优化：优先预加载 Hero 全屏大图，极大提升首屏打开速度 -->
+  <!-- 性能优化：优先预加载 1920x940 Banner 大图 -->
   <link rel="preload" as="image" href="images/Capping machine Banner.svg" type="image/svg+xml">
 
   <style>
@@ -57,55 +57,58 @@
     .sidebar-item.email { background: var(--navy); }
     .sidebar-item:hover { padding-left: 20px; }
 
-    /* ====== 真正全屏铺满 (Full Cover) Hero 样式 ====== */
+    /* ====== 适配 1920x940px 的完整展示全屏 Banner 布局 ====== */
     .hero-section {
-      position: relative;
       width: 100%;
-      min-height: 85vh;
+      /* 按照 1920x940 比例设置全屏最小高度，保证完整不裁剪 */
+      aspect-ratio: 1920 / 940;
+      max-height: 85vh;
+      background: linear-gradient(135deg, #F0F6FF 0%, #FFFFFF 60%);
       display: flex;
       align-items: center;
-      padding: 80px 5%;
+      padding: 0 5%;
+      position: relative;
       overflow: hidden;
-      background-color: var(--navy);
     }
 
-    /* 将 Banner 图片绝对定位铺满全屏 */
-    .hero-bg-img {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .hero-container {
       width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 40px;
+      align-items: center;
       height: 100%;
-      object-fit: cover;
-      object-position: center;
-      z-index: 1;
-    }
-
-    /* 添加左侧半透明渐变蒙层，既能保证大图显示，又确保左侧白色/亮色文字绝对清晰 */
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 45%, rgba(255, 255, 255, 0.1) 100%);
-      z-index: 2;
     }
 
     .hero-content {
-      position: relative;
-      z-index: 3;
-      max-width: 650px;
+      z-index: 2;
     }
 
     .hero-tag { color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
     .hero-title { font-size: 48px; font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 20px; }
-    .hero-desc { font-size: 15px; color: #334155; margin-bottom: 35px; line-height: 1.6; max-width: 560px; font-weight: 500; }
+    .hero-desc { font-size: 15px; color: var(--text-gray); margin-bottom: 35px; line-height: 1.6; max-width: 560px; font-weight: 500; }
     .hero-btn-group { display: flex; gap: 15px; }
     .btn-blue { background: var(--blue); color: #fff; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: 0.3s; display: inline-block; }
     .btn-blue:hover { background: #0052cc; }
-    .btn-outline { border: 1px solid var(--border-color); background: rgba(255,255,255,0.9); color: var(--navy); padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
-    .btn-outline:hover { border-color: var(--blue); color: var(--blue); background: #fff; }
+    .btn-outline { border: 1px solid var(--border-color); background: #fff; color: var(--navy); padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* 保证 1920x940 图片完整展示 (contain)，不被裁切任何边角 */
+    .hero-img-wrap {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .hero-img-wrap img {
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain; /* 关键：确保 1920x940 尺寸 100% 完整显示框内 */
+    }
 
     .products-section { padding: 80px 5%; background: #fff; }
     .section-header { text-align: center; max-width: 650px; margin: 0 auto 50px; }
@@ -196,7 +199,8 @@
     .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: #64748B; }
 
     @media (max-width: 992px) {
-      .hero-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%); }
+      .hero-section { aspect-ratio: auto; height: auto; padding: 50px 5%; }
+      .hero-container { grid-template-columns: 1fr; }
       .products-grid, .contact-grid, .stats-grid, .factory-content-grid, .factory-gallery { grid-template-columns: 1fr; }
       nav { display: none; }
     }
@@ -236,27 +240,28 @@
     </a>
   </div>
 
-  <!-- ====== 真正全屏铺满 (Full-Bleed Cover) Hero 区域 ====== -->
+  <!-- ====== 1920x940 完整比例展示 Banner ====== -->
   <section class="hero-section">
-    <!-- 背景图片铺满，加入 fetchpriority 最高下载优先级提升加载速度 -->
-    <img src="images/Capping machine Banner.svg" alt="Smart & Reliable Packaging Machinery Background" class="hero-bg-img" fetchpriority="high">
-    
-    <!-- 渐变蒙版保证文字高质感与清晰度 -->
-    <div class="hero-overlay"></div>
+    <div class="hero-container">
+      <!-- 左侧文案与按钮 -->
+      <div class="hero-content">
+        <div class="hero-tag">EXCELLENCE IN PACKAGING SOLUTIONS</div>
+        <h1 class="hero-title">Smart & Reliable Packaging Machinery</h1>
+        <p class="hero-desc">TAVENROX delivers high-performance filling, capping, labeling, and turnkey automated production lines tailored for global food, beverage, pharmaceutical, and chemical industries.</p>
+        <div class="hero-btn-group">
+          <a href="#products" class="btn-blue">Explore Products &rarr;</a>
+          <a href="#contact" class="btn-outline">Contact Us</a>
+        </div>
+      </div>
 
-    <!-- 画面左侧内容区域，保持原有文案与按钮结构不变 -->
-    <div class="hero-content">
-      <div class="hero-tag">EXCELLENCE IN PACKAGING SOLUTIONS</div>
-      <h1 class="hero-title">Smart & Reliable Packaging Machinery</h1>
-      <p class="hero-desc">TAVENROX delivers high-performance filling, capping, labeling, and turnkey automated production lines tailored for global food, beverage, pharmaceutical, and chemical industries.</p>
-      <div class="hero-btn-group">
-        <a href="#products" class="btn-blue">Explore Products &rarr;</a>
-        <a href="#contact" class="btn-outline">Contact Us</a>
+      <!-- 右侧 1920x940 完整图片区域（最高优先级下载加速） -->
+      <div class="hero-img-wrap">
+        <img src="images/Capping machine Banner.svg" alt="Smart & Reliable Packaging Machinery" fetchpriority="high">
       </div>
     </div>
   </section>
 
-  <!-- 产品列表板块（全套添加 loading="lazy" 延迟加载，加速首页打开） -->
+  <!-- 产品列表板块 -->
   <section id="products" class="products-section">
     <div class="section-header">
       <div class="section-tag">OUR PRODUCTS</div>
